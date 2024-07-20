@@ -4,6 +4,50 @@
 
 ## Description
 
+## Technical Overview
+
+### Robot Components
+
+Vision:
+
+- 2x ESP32-CAM (with OV2640 camera and async web server) to send each eye's frame to the computer (upon request)
+
+Audio:
+
+- Input: KY-037 sound sensor (adjustable by potentiometer) triggers INMP441 I2S microphone for RECORDING_DURATION_MS (e.g., 5000 ms) audio recording. ESP32-WROVER sends this to computer via web sockets. Recording progress -e.g. Listening (3s)...- visualized on OLED SSD1306 I2C 128x64 screen.
+
+- Output: Speaker with MAX98357A amplifier for audio playback. Audio (from Coqui.ai's text-to-speech conversion) sent from computer, received by ESP32-WROVER, and forwarded to MAX98357A.
+
+Mobility:
+
+- ESP32-WROVER server receives commands
+- Arduino Uno forwards commands to:
+
+  - L298N motor driver (for wheel movement)
+  - 2x SG-90 servos (for up/down/left/right eye movement)
+
+### Computer Components
+
+Visual Processing:
+
+- YOLOv8 (You Only Look Once) to detect objects - potentially obstacles (if both frames are available)
+- SGBM (Semi-Global Block Matching) to estimate object depth (if both frames are available)
+- DeepFace to recognize interlocutor's face (if at least 1 frame is available)
+
+Audio Processing:
+
+- Web sockets receive audio from ESP32-WROVER
+- Whisper for speech-to-text transcription, discarding if below MIN_WORDS_THRESHOLD
+
+Memory:
+
+- ChromaDB to retrieve relevant long-term memories before every LLM or LMM call
+
+AI Processing:
+
+- LMM (Large Multimodal Model) to describe the view in a context-relevant way
+- LLM (Large Language Model) to decide what to speak and which parts to move
+
 ## Setup
 
 ### Computer
@@ -58,7 +102,7 @@ IPAddress gateway1(*, *, *, *);
 
 with your primary network (e.g. your home Wi-Fi) details
 
-And replace:
+Replace:
 
 ```
 const char* ssid2 = "****";
@@ -68,6 +112,24 @@ IPAddress gateway2(*, *, *, *);
 ```
 
 with your secondary (backup) network (e.g. phone hotspot)
+
+And in the case of the ESP32-WROVER, replace:
+
+```
+const char* websocket_server_host1 = "*.*.*.*";
+```
+
+with your computer IP, when connected to your primary network
+
+And:
+
+```
+const char* websocket_server_host2 = "*.*.*.*";
+```
+
+with your computer IP, when connected to your backup network
+
+> **Note:** Make sure to provide unique IPs to each ESP32 (e.g. `192.168.1.180` and `192.168.1.181` for your ESP32-CAMs and `192.168.1.182` for your ESP32-WROVER, with your computer at `192.168.1.174`).
 
 Then, for each of your 2 cameras (e.g. AiThinker, M5StackWide) and WROVER (e.g. Freenove), flash (through their USB type C or VCC/GND/TX/RX) `esp32/XXXX/production.ino` (e.g. `esp32/m5stackwide/production.ino`) with the following `Tools` setup:
 
