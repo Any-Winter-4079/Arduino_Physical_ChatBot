@@ -48,6 +48,10 @@ AI Processing:
 - LMM (Large Multimodal Model) to describe the view in a context-relevant way
 - LLM (Large Language Model) to decide what to speak and which parts to move
 
+## Guides with Diagrams
+
+- [Components](guides/01_components.md)
+
 ## Setup
 
 ### Computer
@@ -131,7 +135,7 @@ with your computer IP, when connected to your backup network
 
 > **Note:** Make sure to provide unique IPs to each ESP32 (e.g. `192.168.1.180` and `192.168.1.181` for your ESP32-CAMs and `192.168.1.182` for your ESP32-WROVER, with your computer at `192.168.1.174`).
 
-Then, for each of your 2 cameras (e.g. AiThinker, M5StackWide) and WROVER (e.g. Freenove), flash (through their USB type C or VCC/GND/TX/RX) `esp32/XXXX/production.ino` (e.g. `esp32/m5stackwide/production.ino`) with the following `Tools` setup:
+Then, for each of your 2 cameras (e.g. AiThinker, M5Stack Wide) and WROVER (e.g. Freenove), flash (through their USB type C or VCC/GND/TX/RX) `esp32/XXXX/production.ino` (e.g. `esp32/m5stackwide/production.ino`) with the following `Tools` setup:
 
 ```
 Board: "ESP32 Dev Module"
