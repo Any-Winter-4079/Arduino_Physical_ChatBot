@@ -50,6 +50,7 @@ AI Processing:
 
 ## Guides with Diagrams
 
+- [Connections](guides/00_connections.md)
 - [Components](guides/01_components.md)
 
 ## Setup
