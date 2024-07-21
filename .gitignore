@@ -1,2 +1,6 @@
-drawio/
+# Ignore draw.io backup files
+.$.*.bkp
+# Ignore .DS_Store files (Mac)
+.DS_Store
+# Ignore virtual environment
 venv/
