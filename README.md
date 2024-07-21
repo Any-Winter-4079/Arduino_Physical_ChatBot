@@ -4,6 +4,25 @@
 
 ## Description
 
+[Missing description]
+
+To run the project:
+
+- `arduino/`: Arduino test and production sketches
+- `esp32/`: ESP32 (-CAMs, -WROVER) test and production sketches
+- `computer/`: Computer test and production scripts
+- `requirements.txt`: Dependencies to install to run the robot
+
+To help understand/use the project:
+
+- `drawio/`: Drawio flowcharts to understand the inner workings of the robot
+- `fritzing/`: Cable connections in Fritzing
+- `guides/`: Step-by-step guides for the contruction of the robot
+- `images/`: Images used in the guides
+- `LICENSE`: Project license
+- `README.md`: Overview of the project
+- `.gitignore`: Files not pushed for being temporary or unnecessary
+
 ## Technical Overview
 
 ### Robot Components
