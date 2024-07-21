@@ -52,6 +52,7 @@ AI Processing:
 
 - [Connections](guides/00_connections.md)
 - [Components](guides/01_components.md)
+- [Chassis and motors](guides/02_chassis_and_motors.md)
 
 ## Setup
 
